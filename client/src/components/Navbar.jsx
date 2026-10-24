@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import AudioToggle from './AudioToggle';
 
 export default function Navbar({ admin = false }) {
   const { user, logout } = useAuth();
@@ -49,6 +50,7 @@ export default function Navbar({ admin = false }) {
           </div>
         )}
       </div>
+      <AudioToggle />
     </header>
   );
 }

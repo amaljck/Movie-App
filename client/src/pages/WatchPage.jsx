@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api, { API_ORIGIN } from '../api';
 import Navbar from '../components/Navbar';
+import { useAudio } from '../context/AudioContext';
 
 export default function WatchPage() {
   const { id } = useParams();
@@ -9,6 +10,7 @@ export default function WatchPage() {
   const [ticket, setTicket] = useState('');
   const [error, setError] = useState('');
   const [playbackError, setPlaybackError] = useState('');
+  const { pauseForMovie } = useAudio();
 
   useEffect(() => {
     let active = true;
@@ -44,6 +46,7 @@ export default function WatchPage() {
                 autoPlay
                 poster={`${API_ORIGIN}${movie.posterUrl}`}
                 src={streamUrl}
+                onPlay={pauseForMovie}
                 onError={() => setPlaybackError('The video could not be played. Check that the uploaded file is a valid MP4 or WebM video.')}
               >
                 Your browser does not support video playback.
